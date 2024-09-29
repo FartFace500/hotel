@@ -1,6 +1,7 @@
 package dat.daos;
 
 import dat.dtos.RoomDTO;
+import dat.entities.Hotel;
 import dat.entities.Room;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -63,7 +64,7 @@ public class RoomDAO implements IDAO<RoomDTO> {
             em.getTransaction().begin();
             Room room = em.find(Room.class, id);
             if (room != null) {
-                room.setHotelId(entity.getHotelId());
+                room.setHotel(em.find(Hotel.class,entity.getHotelId()));
                 room.setRoomNumber(entity.getRoomNumber());
                 room.setPrice(entity.getPrice());
                 em.getTransaction().commit();

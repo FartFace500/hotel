@@ -1,6 +1,7 @@
 package dat.config;
 
 import dat.entities.Hotel;
+import dat.entities.Room;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -29,6 +30,7 @@ public class HibernateConfig {
     // TODO: IMPORTANT: Add Entity classes here for them to be registered with Hibernate
     private static void getAnnotationConfiguration(Configuration configuration) {
         configuration.addAnnotatedClass(Hotel.class);
+        configuration.addAnnotatedClass(Room.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest, String DBName) {
