@@ -89,6 +89,7 @@ public class HotelAndRoomController {
         } else {
             ctx.result("No hotel found");
         }
+        ctx.status(HttpStatus.NOT_FOUND);
         ctx.result("No valid HotelDTO found in the body");
     }
 
@@ -111,6 +112,7 @@ public class HotelAndRoomController {
         } else {
             ctx.result("No hotel found");
         }
+        ctx.status(HttpStatus.NOT_FOUND);
         ctx.result("No valid HotelDTO found in the body");
     }
 
@@ -131,6 +133,7 @@ public class HotelAndRoomController {
         } else {
             ctx.result("No hotel found");
         }
+        ctx.status(HttpStatus.NOT_FOUND);
         ctx.result("No valid HotelDTO found in the body");
     }
 
