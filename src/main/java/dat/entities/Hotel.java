@@ -22,7 +22,7 @@ public class Hotel {
     @Column(name="address", length = 1000, nullable = false)
     private String address;
     @Column(name="rooms", nullable = false)
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "hotel")
     private List<Room> rooms = new ArrayList<>();
 
     // make a constructor that takes a PoemDTO object as parameter and initializes the fields.

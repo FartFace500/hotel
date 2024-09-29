@@ -14,12 +14,14 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int hotelId; //TODO: make this shii and acntual onetomany relationship with teh entities
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel; //TODO: make this shii and acntual onetomany relationship with the entities
     private int roomNumber;
     private int price;
 
     public Room(RoomDTO roomDTO) {
-        this.hotelId = roomDTO.getHotelId();
+//        this.hotel = roomDTO.getHotelId(); //TODO: figure out if this should be set somewhere else
         this.roomNumber = roomDTO.getRoomNumber();
         this.price = roomDTO.getPrice();
     }
