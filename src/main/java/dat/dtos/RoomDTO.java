@@ -25,7 +25,7 @@ public class RoomDTO {
 
     public RoomDTO(Room room) {
         this.id = room.getId();
-//        this.hotelId = room.getHotel().getId();
+        this.hotelId = room.getHotel().getId();
         this.roomNumber = room.getRoomNumber();
         this.price = room.getPrice();
     }
