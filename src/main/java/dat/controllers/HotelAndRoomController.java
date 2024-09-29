@@ -71,42 +71,67 @@ public class HotelAndRoomController {
     }
 
     public void delete(Context ctx){
-        Object object = ctx.body();
         int id = Integer.parseInt(ctx.pathParam("id"));
-        if (object instanceof RoomDTO) {
+
+        RoomDTO fetchedRoom = roomDAO.getById(id);
+        if (fetchedRoom != null) {
             roomDAO.delete(id);
-        } else if (object instanceof HotelDTO) {
-            hotelDAO.delete(id);
+            ctx.result("deleted: " + id);
+            return;
+        } else {
+            ctx.result("No room found");
         }
-        ctx.result("deleted: " + id);
+        HotelDTO fetchedHotel = hotelDAO.getById(id);
+        if (fetchedHotel != null) {
+            hotelDAO.delete(id);
+            ctx.result("deleted: " + id);
+            return;
+        } else {
+            ctx.result("No hotel found");
+        }
+        ctx.result("No valid HotelDTO found in the body");
     }
 
     public void update(Context ctx){
-        Object object = ctx.body();
         int id = Integer.parseInt(ctx.pathParam("id"));
-        if (object instanceof RoomDTO) {
-            //TODO: same as below, but for roomDTO
-        } else if (object instanceof HotelDTO) {
-            HotelDTO hotelDTO = ctx.bodyAsClass(HotelDTO.class);
-            hotelDTO = hotelDAO.update(id, hotelDTO);
-            ctx.status(HttpStatus.OK);
-            ctx.json(hotelDTO);
+
+        RoomDTO fetchedRoom = roomDAO.getById(id);
+        if (fetchedRoom != null) {
+            ctx.json(fetchedRoom);
+            fetchedRoom = roomDAO.update(id, fetchedRoom);
+            return;
+        } else {
+            ctx.result("No room found");
         }
+        HotelDTO fetchedHotel = hotelDAO.getById(id);
+        if (fetchedHotel != null) {
+            fetchedHotel = hotelDAO.update(id, fetchedHotel);
+            ctx.json(fetchedHotel);
+            return;
+        } else {
+            ctx.result("No hotel found");
+        }
+        ctx.result("No valid HotelDTO found in the body");
     }
 
     public void getById(Context ctx){
-        Object object = ctx.body();
         int id = Integer.parseInt(ctx.pathParam("id"));
-        if (object instanceof RoomDTO) {
-            //TODO: same as below, but for roomDTO
-        } else if (object instanceof HotelDTO) {
-            HotelDTO hotelDTO = hotelDAO.getById(id);
-            if (hotelDTO != null) {
-                ctx.json(hotelDTO);
-            } else {
-                ctx.result("No hotel found");
-            }
+
+        RoomDTO fetchedRoom = roomDAO.getById(id);
+        if (fetchedRoom != null) {
+            ctx.json(fetchedRoom);
+            return;
+        } else {
+            ctx.result("No room found");
         }
+        HotelDTO fetchedHotel = hotelDAO.getById(id);
+        if (fetchedHotel != null) {
+            ctx.json(fetchedHotel);
+            return;
+        } else {
+            ctx.result("No hotel found");
+        }
+        ctx.result("No valid HotelDTO found in the body");
     }
 
 

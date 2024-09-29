@@ -30,7 +30,7 @@ public class RoomDAO implements IDAO<RoomDTO> {
         List<Room> rooms = new ArrayList<>();
         try(var em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.createQuery("SELECT r FROM Room r", Room.class).getResultList();
+            rooms = em.createQuery("SELECT r FROM Room r", Room.class).getResultList();
         }
         return RoomDTO.toDTOList(rooms);
     }
@@ -42,9 +42,8 @@ public class RoomDAO implements IDAO<RoomDTO> {
             Room room = em.find(Room.class, id);
             if(room != null) {
             return new RoomDTO(room);
-            } else {
-                return null;
             }
+                return null;
         }
     }
 
